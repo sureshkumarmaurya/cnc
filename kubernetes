@@ -1,0 +1,90 @@
+Install Docker Engine on Ubuntu
+
+=============================================================================================================================
+https://www.google.com/search?q=installing+docker+on+ubuntu+18.04&oq=installing+docker+on+ubuntu+18.04&aqs=chrome..69i57&sourceid=chrome&ie=UTF-8
+=============================================================================================================================
+
+1) Uninstall old versions:
+======================
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
+====================================================================================================
+2)Update the apt package index and install packages to allow apt to use a repository over HTTPS:
+
+$ sudo apt-get update
+
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+ ====================================================================================================
+ 
+    3) Add Docker’s official GPG key:
+
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+$ sudo apt-key fingerprint 0EBFCD88
+
+4)
+
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+ ====================================================================================================
+ 
+ 5)INSTALL DOCKER ENGINE
+ 
+ 
+ $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+ ====================================================================================================
+ 
+ Installing kubeadm on K8s Master Node:
+ 
+ =====================================================================================================
+ 
+ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+ 
+ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+ 
+ =====================================================================================================
+ 
+ 1)Installing kubeadm, kubelet and kubectl
+ 
+kubeadm: the command to bootstrap the cluster.
+
+kubelet: the component that runs on all of the machines in your cluster and does things like starting pods and containers
+kubectl: the command line util to talk to your cluster.
+
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+
+systemctl daemon-reload
+systemctl restart kubelet
+
+====================================================================================================
+Note: This step is not required on *Worker-nodes
+------------------------------------------------
+2) Initializing your control-plane node(Master)
+
+To initialize the control-plane node run:
+
+kubeadm init --pod-network-cidr=10.244.0.0/16(
+
+Installing a Pod network add-on
+
+For flannel to work correctly, you must pass --pod-network-cidr=10.244.0.0/16 to kubeadm init.
+
+==========================================================================================================
+ 
+kubeadm join 192.168.122.4:6443 --token nj7jlc.0qj9ugxoxrwk4gw9 \
+    --discovery-token-ca-cert-hash sha256:0c1532c3417393134b7387df7e37a20e62191770c1dd8d5004cf721b264795fd 
+ 
