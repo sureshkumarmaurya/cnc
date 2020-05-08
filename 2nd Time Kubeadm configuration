@@ -40,14 +40,36 @@ May 08 18:56:57 k8s-workernode1 dockerd[1102]: time="2020-05-08T18:56:57.9591341
 Hint: Some lines were ellipsized, use -l to show in full.
 [root@k8s-workernode1 ~]# 
 
+==============================================================================================================
+Note: These three steps (1, 2, 3) are very important:
+-----------------------------------------------------
 
+1) Disable the swap:
 
+free -m
+
+swapoff -a
+
+vim /etc/fstab
+
+#/dev/mapper/centos-swap swap                    swap    defaults        0 0
+
+mount -a
+
+2) Disable the SELINUX:
+
+setenforce 0;sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+
+3) Stop & Disable the firewalld:
+
+systemctl stop firewalld && systemctl disable firewalld
 
 ==============================================================================================================
 
 Step 1: Configure Kubernetes Repository
 Kubernetes packages are not available from official CentOS 7 repositories. This step needs to be performed on the Master Node, and each Worker Node you plan on utilizing for your container setup. Enter the following command to retrieve the Kubernetes repositories.
-==============================================================================================================
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -236,3 +258,34 @@ This node has joined the cluster:
 Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 
 [root@k8s-workernode1 ~]#
+
+==============================================================================================
+To lable K8s Worker Node:
+--------------------------------------------------------------
+Before Labeling the Worker Node:
+
+[student@k8sm1 ~]$ kubectl get  nodes
+NAME    STATUS   ROLES    AGE     VERSION
+k8sm1   Ready    master   20m     v1.18.2
+k8sn1   Ready    <none>   2m54s   v1.18.2
+[student@k8sm1 ~]$ 
+--------------------------------------------------------------
+kubectl label node k8sn1 node-role.kubernetes.io/worker=worker
+
+After Labeling the Worker Node:
+
+[student@k8sm1 ~]$ kubectl get  nodes
+NAME    STATUS   ROLES    AGE     VERSION
+k8sm1   Ready    master   21m     v1.18.2
+k8sn1   Ready    worker   3m39s   v1.18.2
+[student@k8sm1 ~]$
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
