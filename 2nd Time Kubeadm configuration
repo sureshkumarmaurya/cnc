@@ -2,7 +2,11 @@ Steps for Installing Kubernetes on CentOS 7
 To use Kubernetes, you need to install a containerization engine. Currently, the most popular container solution is Docker. Docker needs to be installed on CentOS, both on the Master Node and the Worker Nodes.
 
 ==============================================================================================================
-To Install Docker folow the below steps either links or commands:
+To Install Docker follow the below steps either links or commands: 
+
+-----------------------------------------------------------------
+Note: Do this steps on both K8s Master Node and Worker Nodes
+-----------------------------------------------------------------
 
 https://docs.docker.com/engine/install/centos/
 
@@ -11,11 +15,18 @@ Always examine scripts downloaded from the internet before running them locally.
 $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
 
+[root@k8sn1 ~]# usermod -aG docker student
+
 sudo systemctl enable docker && systemctl start docker
 sudo systemctl status docker
 
+[root@k8sn1 ~]# systemctl enable docker 
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+[root@k8sn1 ~]# systemctl start docker 
+[root@k8sn1 ~]# systemctl status docker 
+
 Docker service must be running:
------------------
+---------------------------------------------------------------------------------------
 [root@k8s-workernode1 ~]# systemctl status docker
 ● docker.service - Docker Application Container Engine
    Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
