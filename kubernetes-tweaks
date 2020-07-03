@@ -1,1 +1,13 @@
+I love K8s-Tweaks
+=================
+Question-1:
+How to check K8s Version on Client and Server?
+
+Answer-1: 
+kubectl version --short
+
+[*Jai_Shri_SitaRam-$]kubectl version --short
+Client Version: v1.18.4
+Server Version: v1.18.2
+
 
