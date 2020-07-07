@@ -293,7 +293,9 @@ k8sn1   Ready    worker   3m39s   v1.18.2
 --------------------------------------------------------------
 
 
-
+To install kubectl on CentOS 7:
+================================
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 
 
 
