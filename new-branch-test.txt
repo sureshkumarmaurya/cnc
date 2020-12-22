@@ -3,3 +3,6 @@ Hello!
 This is the new-branch-test.txt file so that I can raise the pull request'
 
 Thanks for testing !
+
+=============Hi this is the new line added from VSCode===================
+
