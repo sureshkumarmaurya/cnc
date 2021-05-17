@@ -1,0 +1,10 @@
+How to install Helm on CentOS 7?
+
+Step 1:  wget https://get.helm.sh/helm-v3.5.4-linux-amd64.tar.gz
+
+Step 2: tar -zxvf helm-v3.5.4-linux-amd64.tar.gz
+
+Step 3: sudo mv linux-amd64/helm /usr/local/bin/helm
+
+Step 4: helm version
+version.BuildInfo{Version:"v3.5.4", GitCommit:"1b5edb69df3d3a08df77c9902dc17af864ff05d1", GitTreeState:"clean", GoVersion:"go1.15.11"}
