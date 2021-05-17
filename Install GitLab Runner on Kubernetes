@@ -2,3 +2,5 @@ How to Install GitLab Runner on Kubernetes
 
 https://adambcomer.com/blog/install-gitlab-runner-kubernetes/#:~:text=First%2C%20declare%20a%20new%20Namespace%20called%20gitlab%2Drunner.&text=After%20we%20create%20the%20new,%2Drunner%2Dservice%2Daccount.
 
+https://www.scaleway.com/en/docs/how-to-use-the-gitlab-kubernetes-integration/
+
